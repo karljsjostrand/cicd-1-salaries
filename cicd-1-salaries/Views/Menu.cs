@@ -1,4 +1,4 @@
-﻿namespace cicd_1_salaries.Models
+﻿namespace cicd_1_salaries.Views
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Account : User
+    class Menu
     {
     }
 }
