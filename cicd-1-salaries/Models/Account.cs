@@ -25,7 +25,7 @@
 
         public override string ToString()
         {
-            return $"{Name} ({Occupation.GetName(Occupation)}) @{Balance} +{Salary}";
+            return $"{Name}\t ({Enum.GetName(Occupation)})\t @{Balance}\t +{Salary}";
         }
     }
 }

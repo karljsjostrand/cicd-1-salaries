@@ -13,8 +13,10 @@
             var users = Seeder.Users();
 
             var karl = users.Find((u) => string.Equals(u.Name, "Karl", StringComparison.OrdinalIgnoreCase));
+            var admin = users.Find((u) => string.Equals(u.Name, "admin1", StringComparison.OrdinalIgnoreCase));
 
             Console.WriteLine(karl);
+            Console.WriteLine(admin);
         }
     }
 }
