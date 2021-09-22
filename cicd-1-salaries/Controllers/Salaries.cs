@@ -12,7 +12,7 @@
         private List<User> users;
         private User activeUser;
 
-        private bool IsValidUser(string name, string password)
+        private bool IsValidLogin(string name, string password)
         {
             throw new NotImplementedException();
         }
@@ -24,20 +24,16 @@
             //if (activeUser is not Admin && activeUser.Name is not userName) return false;
         }
 
-        public Account GetAccount(string "admin", string password)
+        public Account GetAccount(string name, string password)
         {
             throw new NotImplementedException();
-
-            return new Admin();
-
-            if (IsValidUser(name, password) is false) return null;
         }
 
         public User Login(string name, string password)
         {
             throw new NotImplementedException();
 
-            if (IsValidUser(name, password) is false) return null;
+            if (IsValidLogin(name, password) is false) return null;
         }
     }
 }
