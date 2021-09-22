@@ -22,5 +22,10 @@
         public Occupation Occupation { get; set; }
         public int Salary { get; set; }
         public int Balance { get; }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Occupation.GetName(Occupation)}) @{Balance} +{Salary}";
+        }
     }
 }

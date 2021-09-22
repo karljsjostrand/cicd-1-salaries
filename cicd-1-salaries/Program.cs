@@ -2,15 +2,19 @@
 {
 	using cicd_1_salaries.Controllers;
 	using cicd_1_salaries.Models;
+    using cicd_1_salaries.Models.Data;
     using System;
+    using System.Collections.Generic;
 
     internal static class Program
     {
         private static void Main()
         {
-            var salaries = new Salaries();
+            var users = Seeder.Users();
 
-            var user = new Account("Karl", "123", Occupation.Developer);
+            var karl = users.Find((u) => string.Equals(u.Name, "Karl", StringComparison.OrdinalIgnoreCase));
+
+            Console.WriteLine(karl);
         }
     }
 }
