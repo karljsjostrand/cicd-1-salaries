@@ -1,4 +1,4 @@
-﻿namespace cicd_1_salaries.Models
+namespace cicd_1_salaries.Models
 {
     using System;
     using System.Collections.Generic;
