@@ -1,12 +1,12 @@
 ﻿namespace cicd_1_salaries
 {
+    using cicd_1_salaries.Models;
     using System;
 
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }
