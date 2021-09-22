@@ -20,6 +20,15 @@
         public static List<User> Users()
         {
             throw new NotImplementedException();
+
+            var users = new List<User>();
+
+            // TODO
+
+            users.Add(new Admin("admin", "123"));
+            users.Add(new Account(""));
+
+            return users;
         }
     }
 }
