@@ -7,29 +7,28 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Salaries
+    public static class Salaries
     {
-        private List<User> users;
-        private User activeUser;
+        private static List<User> users;
+        private static User activeUser;
 
-        private bool IsValidLogin(string name, string password)
+        private static bool IsValidLogin(string name, string password)
         {
             throw new NotImplementedException();
         }
 
-        public bool RemoveUser(string userName)
+        public static bool RemoveUser(string userName)
         {
-            throw new NotImplementedException();
-
+            return false;
             //if (activeUser is not Admin && activeUser.Name is not userName) return false;
         }
 
-        public Account GetAccount(string name, string password)
+        public static Account GetAccount(string name, string password)
         {
             throw new NotImplementedException();
         }
 
-        public User Login(string name, string password)
+        public static User Login(string name, string password)
         {
             throw new NotImplementedException();
 

@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public enum Occupation
+    public enum Role
     {
         Manager,
         Developer,
@@ -14,18 +14,18 @@
 
     public class Account : User
     {
-        public Account(string name, string password, Occupation occupation) : base(name, password)
+        public Account(string name, string password, Role role) : base(name, password)
         {
-            Occupation = occupation;
+            Role = role;
         }
 
-        public Occupation Occupation { get; set; }
+        public Role Role { get; set; }
         public int Salary { get; set; }
         public int Balance { get; }
 
         public override string ToString()
         {
-            return $"{Name}\t ({Enum.GetName(Occupation)})\t @{Balance}\t +{Salary}";
+            return $"{Name}\t ({Enum.GetName(Role)})\t @{Balance}\t +{Salary}";
         }
     }
 }
