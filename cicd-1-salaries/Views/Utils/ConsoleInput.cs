@@ -1,4 +1,4 @@
-﻿namespace cicd_1_salaries.Views
+﻿namespace cicd_1_salaries.Views.Utils
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class Menu
+    public static class ConsoleInput
     {
     }
 }

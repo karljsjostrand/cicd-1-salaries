@@ -8,18 +8,14 @@
 
     public static class Seeder
     {
-        private static List<Account> Accounts()
-        {
-            var accounts = new List<Account>();
-
-            // TODO
-
-            return accounts;
-        }
-
         public static List<User> Users()
         {
-            throw new NotImplementedException();
+            var users = new List<User>();
+
+            users.Add(new Admin("admin1", "1234", Role.Manager));
+            users.Add(new Account("Karl", "2345", Role.Developer));
+
+            return users;
         }
     }
 }
