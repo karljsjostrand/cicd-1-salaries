@@ -1,5 +1,6 @@
 ﻿namespace cicd_1_salaries.Views
 {
+    using System;
     internal class AdminView
     {
         public AdminView()
@@ -9,7 +10,7 @@
 
         private void View()
         {
-            System.Console.WriteLine("Admin view");
+            Console.WriteLine("Admin view");
         }
     }
 }
