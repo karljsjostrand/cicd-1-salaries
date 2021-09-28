@@ -9,12 +9,11 @@
 
     public static class Salaries
     {
-        private static List<User> users;
-        private static User activeUser;
+        public static List<User> Users { get; set; }
 
         private static bool IsValidLogin(string name, string password)
         {
-            throw new NotImplementedException();
+            return true; // TODO
         }
 
         public static bool RemoveUser(string userName)
@@ -23,16 +22,13 @@
             //if (activeUser is not Admin && activeUser.Name is not userName) return false;
         }
 
-        public static Account GetAccount(string name, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public static User Login(string name, string password)
         {
-            throw new NotImplementedException();
-
             if (IsValidLogin(name, password) is false) return null;
+
+            var user = Users.Find((u) => u.Name == name && u.Password == password);
+
+            return user;
         }
     }
 }
