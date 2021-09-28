@@ -17,14 +17,14 @@
 
     internal class LoginView
     {
-        private User User { get; set; }
-
         public LoginView()
         {
-            View();
+            Nav();
         }
 
-        private void View()
+        private User User { get; set; }
+
+        private void Nav()
         {
             while (User is null)
             {
@@ -33,16 +33,20 @@
                 switch (nav)
                 {
                     case Navigation.Login:
+                        Login();
                         break;
                     case Navigation.Exit:
                         return;
                 }
-
-                var (name, password) = PromptLoginDetails();
-
-                User = new Admin(name, password, Role.Manager); // TODO get user model from user controller
             }
+        }
 
+        private void Login()
+        {
+            var (name, password) = PromptLoginDetails();
+            User = new Admin(name, password, Role.Manager); // TODO get user model from user controller
+
+            // Create new view based on user type.
             if (User is Admin)
             {
                 new AdminView();
