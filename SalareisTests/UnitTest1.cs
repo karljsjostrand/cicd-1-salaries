@@ -45,11 +45,5 @@ namespace SalareisTests
 
             Assert.IsNull(actual);
         }
-
-        [Test]
-        public void Test_Fail()
-        {
-            Assert.Fail();
-        }
     }
 }
