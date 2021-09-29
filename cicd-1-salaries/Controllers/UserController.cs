@@ -12,10 +12,12 @@ namespace cicd_1_salaries.Controllers
         private static List<User> users = Seeder.Users();
 
         private User currentUser;
-        private int myProperty;
-
-        private bool IsUserActive { get; set; }
-
+        /// <summary>
+        /// Checks if the User exist
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool IsValidLogin(string userName, string password)
         {
 
@@ -25,14 +27,24 @@ namespace cicd_1_salaries.Controllers
                 return true;
             }
             return false;
-
         }
+        /// <summary>
+        /// Logs in.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns>In logged user</returns>
         public User Login(string userName, string password)
         {
             if (IsValidLogin(userName, password) is false) return null;
             return currentUser;
         }
-
+        /// <summary>
+        /// Removes user.
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool RemoveUser(string userName, string password)
         {
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
@@ -43,11 +55,6 @@ namespace cicd_1_salaries.Controllers
             }
             return false;
         }
- 
-        public int MyProperty { get => myProperty; set => myProperty = value; }
-
-
-
 
     }
 }
