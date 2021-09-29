@@ -21,7 +21,7 @@
 
         public Role Role { get; set; }
         public int Salary { get; set; }
-        public int Balance { get; }
+        public int Balance { get; set; }
 
         public override string ToString()
         {

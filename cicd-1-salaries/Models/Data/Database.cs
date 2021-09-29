@@ -6,9 +6,21 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public static class Seeder
+    public static class Database
     {
-        public static List<User> Users()
+        private static List<User> users;
+
+        public static List<User> Users
+        {
+            get
+            {
+                if (users is null) users = SeedUsers();
+                return users;
+            }
+        }
+
+        public static List<Request> Requests { get; set; }
+        private static List<User> SeedUsers()
         {
             var users = new List<User>();
 
