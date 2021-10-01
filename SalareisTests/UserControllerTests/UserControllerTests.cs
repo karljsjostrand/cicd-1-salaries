@@ -24,7 +24,6 @@ namespace SalareisTests
             {
                 admin,user
             };
-
             UserController.users = users;
         }
 
@@ -54,7 +53,7 @@ namespace SalareisTests
             var name = "Mohammad";
             var password = "Passw0rd@123";
             var actual = UserController.RemoveUser(name, password);
-            Assert.IsFalse(!actual);
+            Assert.IsTrue(actual);
 
         }
         [Test]
@@ -62,8 +61,9 @@ namespace SalareisTests
         {
             var name = "Abcdef";
             var password = "Passw0rd@123";
+            var expected = false;
             var actual = UserController.RemoveUser(name, password);
-            Assert.IsTrue(!actual);
+            Assert.AreEqual(expected,actual);
 
         }
 
