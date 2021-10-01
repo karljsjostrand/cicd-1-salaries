@@ -9,16 +9,16 @@ namespace cicd_1_salaries.Controllers
     public class UserController
     {
 
-        private static List<User> users = Seeder.Users();
+        public static List<User> users = Seeder.Users();
 
-        private User currentUser;
+        private static User currentUser;
         /// <summary>
         /// Checks if the User exist
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        private bool IsValidLogin(string userName, string password)
+        private static bool IsValidLogin(string userName, string password)
         {
 
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
@@ -28,15 +28,16 @@ namespace cicd_1_salaries.Controllers
             }
             return false;
         }
+
         /// <summary>
         /// Logs in.
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns>In logged user</returns>
-        public User Login(string userName, string password)
+        public static User Login(string userName, string password)
         {
-            if (IsValidLogin(userName, password) is false) return null;
+            if (!IsValidLogin(userName, password)) return null;
             return currentUser;
         }
         /// <summary>
@@ -45,13 +46,16 @@ namespace cicd_1_salaries.Controllers
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool RemoveUser(string userName, string password)
+        public static bool RemoveUser(string userName, string password)
         {
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
                 currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
-                users.Remove(currentUser);
-                return true;
+                if (currentUser != null)
+                {
+                    users.Remove(currentUser);
+                    return true;
+                }
             }
             return false;
         }
