@@ -8,14 +8,14 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal enum Navigation
-    {
-        Login,
-        Exit,
-    }
-
     internal class LoginView
     {
+        private enum Navigation
+        {
+            Login,
+            Exit,
+        }
+
         public LoginView()
         {
             Nav();
