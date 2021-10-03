@@ -8,8 +8,15 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    class AdminController
+    public class AdminController // TODO inherit fron AccountController
     {
+        public AdminController(Admin admin)
+        {
+            Admin = admin;
+        }
+
+        public Admin Admin { get; }
+
         public List<User> GetAllUsers()
         {
             return Database.Users;
@@ -36,19 +43,21 @@
             }
         }
         
-        public bool CreateUser(string name, string password, Role role, bool isAdmin)
+        public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
-            // User does not exist.
+            // User already exists.
             if (Database.Users.Find((u) => u.Name == name) is not null) return false;
+
+            // TODO check that password contains at least one number and one letter
 
             if (isAdmin)
             {
-                Database.Users.Add(new Admin(name, password, role));
+                Database.Users.Add(new Admin(name, password, role, salary));
             }
             else
             {
-                Database.Users.Add(new Account(name, password, role));
-            } 
+                Database.Users.Add(new Account(name, password, role, salary));
+            }
 
             return true;
         }
@@ -63,6 +72,5 @@
 
             return true;
         }
-
     }
 }

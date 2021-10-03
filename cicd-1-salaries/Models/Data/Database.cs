@@ -9,25 +9,46 @@
     public static class Database
     {
         private static List<User> users;
+        private static List<Request> requests;
 
         public static List<User> Users
         {
             get
             {
-                if (users is null) users = SeedUsers();
+                if (users is null) SeedData();
                 return users;
             }
         }
 
-        public static List<Request> Requests { get; set; }
-        private static List<User> SeedUsers()
+
+        public static List<Request> Requests 
         {
-            var users = new List<User>();
+            get
+            {
+                if (requests is null) SeedData();
+                return requests;
+            }
+        }
 
-            users.Add(new Admin("admin1", "1234", Role.Manager));
-            users.Add(new Account("Karl", "2345", Role.Developer));
+        private static void SeedData()
+        {
+            users = new List<User>();
+            requests = new List<Request>();
 
-            return users;
+            #region Users
+            var admin1 = new Admin("admin1", "admin1234", Role.Manager, 2200);
+
+            users.Add(admin1);
+
+            var adam = new Account("Adam", "abc234", Role.Developer, 2000);
+
+            users.Add(adam);
+            #endregion
+
+            #region Requests
+            requests.Add(new Request(adam, Subject.Salary, 2500));
+            #endregion
+
         }
     }
 }
