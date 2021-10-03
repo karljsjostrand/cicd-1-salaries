@@ -13,7 +13,7 @@ namespace SalareisTests
         [SetUp]
         public void Setup()
         {
-            admin1 = new Admin("admin1", "111", Role.Developer);
+            admin1 = new Admin("admin1", "111", Role.Developer, 1111);
 
             users = new List<User>()
             {

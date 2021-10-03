@@ -18,8 +18,7 @@
 
         public static bool RemoveUser(string userName)
         {
-            return false;
-            //if (activeUser is not Admin && activeUser.Name is not userName) return false;
+            return false; // TODO
         }
 
         public static User Login(string name, string password)

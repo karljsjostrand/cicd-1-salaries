@@ -18,14 +18,14 @@
 
         public LoginView()
         {
-            Nav();
+            NavMenu();
         }
 
-        private User User { get; set; }
-
-        private void Nav()
+        private void NavMenu()
         {
-            while (User is null)
+            var exit = false;
+
+            while (exit is false)
             {
                 var nav = PromptNavigation();
 
@@ -35,7 +35,8 @@
                         Login();
                         break;
                     case Navigation.Exit:
-                        return;
+                        exit = true;
+                        break;
                 }
             }
         }
@@ -43,16 +44,20 @@
         private void Login()
         {
             var (name, password) = PromptLoginDetails();
-            User = new Admin(name, password, Role.Manager); // TODO get user model from user controller
+            var user = Models.Data.Database.Users.Find((u) => u.Name == name && u.Password == password); // TODO get user object from user controller login method
 
             // Create new view based on user type.
-            if (User is Admin)
+            if (user is Admin)
             {
-                new AdminView();
+                new AdminView(user as Admin);
             }
-            else if (User is Account)
+            else if (user is Account)
             {
-                new AccountView();
+                new AccountView(user as Account);
+            }
+            else
+            {
+                Console.WriteLine("Invalid login details.\n");
             }
         }
 
@@ -75,7 +80,7 @@
 
         private (string name, string password) PromptLoginDetails()
         {
-            Console.WriteLine("Login\n");
+            Console.WriteLine("Sign in\n");
             Console.Write("User: ");
             var name = Console.ReadLine();
             Console.Write("Password: ");

@@ -14,8 +14,26 @@
 
     public class Request
     {
+        public Request(User user, Subject subject, Object value)
+        {
+            User = user;
+            Subject = subject;
+            Value = value;
+        }
+
+        /// <summary>
+        /// Requestee.
+        /// </summary>
         public User User { get; set; }
+        
+        /// <summary>
+        /// Concern for request.
+        /// </summary>
         public Subject Subject { get; set; }
-        public Object Value { get; set; } // Account.Role eller ny lön
+
+        /// <summary>
+        /// Desired value in regard to subject.
+        /// </summary>
+        public Object Value { get; set; }
     }
 }

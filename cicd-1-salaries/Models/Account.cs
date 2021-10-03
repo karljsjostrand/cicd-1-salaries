@@ -14,9 +14,10 @@
 
     public class Account : User
     {
-        public Account(string name, string password, Role role) : base(name, password)
+        public Account(string name, string password, Role role, int salary) : base(name, password)
         {
             Role = role;
+            Salary = salary;
         }
 
         public Role Role { get; set; }
@@ -25,7 +26,7 @@
 
         public override string ToString()
         {
-            return $"{Name}\t ({Enum.GetName(Role)})\t @{Balance}\t +{Salary}";
+            return $"{Name}\n Role: {Enum.GetName(Role)}\n Balance: {Balance}\n Salary: {Salary}";
         }
     }
 }
