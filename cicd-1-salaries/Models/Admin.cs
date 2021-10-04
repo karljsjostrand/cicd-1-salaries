@@ -8,7 +8,7 @@ namespace cicd_1_salaries.Models
 
     public class Admin : Account
     {
-        public Admin(string name, string password, Occupation occupation) : base(name, password, occupation)
+        public Admin(string name, string password, Role occupation, int salary) : base(name, password, occupation, salary)
         {
         }
     }
