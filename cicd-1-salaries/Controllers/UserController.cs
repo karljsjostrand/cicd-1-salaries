@@ -9,7 +9,7 @@ namespace cicd_1_salaries.Controllers
     public class UserController
     {
 
-        public static List<User> users = Seeder.Users();
+        public static List<User> users = Database.Users;
 
         private static User currentUser;
         /// <summary>

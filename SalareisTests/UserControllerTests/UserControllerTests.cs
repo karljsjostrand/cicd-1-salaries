@@ -17,7 +17,7 @@ namespace SalareisTests
         [SetUp]
         public void Setup()
         {
-            admin = new Admin("admin1", "Admin@123", Occupation.Developer);
+            admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
             user = new User("Mohammad", "Passw0rd@123");
 
             users = new List<User>()
@@ -63,7 +63,7 @@ namespace SalareisTests
             var password = "Passw0rd@123";
             var expected = false;
             var actual = UserController.RemoveUser(name, password);
-            Assert.AreEqual(expected,actual);
+            Assert.AreEqual(expected, actual);
 
         }
 
