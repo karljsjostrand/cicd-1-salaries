@@ -7,33 +7,27 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class Salaries
+    public static class Salaries
     {
-        private List<User> users;
-        private User activeUser;
+        public static List<User> Users { get; set; }
 
-        private bool IsValidLogin(string name, string password)
+        private static bool IsValidLogin(string name, string password)
         {
-            throw new NotImplementedException();
+            return true; // TODO
         }
 
-        public bool RemoveUser(string userName)
+        public static bool RemoveUser(string userName)
         {
-            throw new NotImplementedException();
-
-            //if (activeUser is not Admin && activeUser.Name is not userName) return false;
+            return false; // TODO
         }
 
-        public Account GetAccount(string name, string password)
+        public static User Login(string name, string password)
         {
-            throw new NotImplementedException();
-        }
-
-        public User Login(string name, string password)
-        {
-            throw new NotImplementedException();
-
             if (IsValidLogin(name, password) is false) return null;
+
+            var user = Users.Find((u) => u.Name == name && u.Password == password);
+
+            return user;
         }
     }
 }
