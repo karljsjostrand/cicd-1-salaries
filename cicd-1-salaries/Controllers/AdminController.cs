@@ -24,7 +24,7 @@
 
         public List<Request> GetAccountRequests(string name)
         {
-            List<Request> requests = new List<Request>();
+            List<Request> requests = new();
 
             foreach (var request in Database.Requests)
             {
@@ -42,7 +42,7 @@
                 account.Balance += account.Salary;
             }
         }
-        
+
         public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
             // User already exists.
@@ -67,7 +67,7 @@
             var user = Database.Users.Find((u) => u.Name == name && u.Password == password);
 
             if (user is null) return false;
-            
+
             Database.Users.Remove(user);
 
             return true;

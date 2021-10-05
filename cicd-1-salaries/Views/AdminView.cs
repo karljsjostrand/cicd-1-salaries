@@ -89,18 +89,27 @@ namespace cicd_1_salaries.Views
 
             var requests = adminController.GetAccountRequests(name);
 
-            Console.WriteLine("Select request");
-            for (int i = 0; i < requests.Count; i++)
+            if (requests.Count > 0)
             {
-                Console.WriteLine($" [{i}] {requests[i]}");
+                Console.WriteLine("Select request");
+                for (int i = 0; i < requests.Count; i++)
+                {
+                    Console.WriteLine($" [{i}] {requests[i]}");
+                }
+                Console.Write("> ");
+                var input = Console.ReadLine() == string.Empty;
+                var inputIndex = Convert.ToInt32(input);
+
+                var request = requests[inputIndex];
+
+                Console.WriteLine("Editing request: " + request + "\n");
+
+                // TODO allow for editing the request, EditRequestView?
             }
-            Console.Write("> ");
-            var inputIndex = Convert.ToInt32(Console.ReadLine());
-
-            var request = requests[inputIndex];
-
-            Console.WriteLine("Editing request: " + request + "\n");
-            // TODO allow for editing the request, EditRequestView?
+            else
+            {
+                Console.WriteLine($"No requests found for user {name}.");
+            }
         }
 
         private void PayAccounts()
