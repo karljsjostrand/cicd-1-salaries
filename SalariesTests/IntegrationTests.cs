@@ -7,6 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    [TestFixture]
     class IntegrationTests
     {
         //private adminController = new AdminController
