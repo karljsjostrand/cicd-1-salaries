@@ -1,0 +1,27 @@
+﻿namespace SalareisTests
+{
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    class IntegrationTests
+    {
+        [Test]
+        public void Test_LoginAccountOrAdmin()
+        {
+            // log in as account, user is logged in as account
+            // log in as admin, user is logged in as admin
+        }
+
+        [Test]
+        public void Test_LoginAdminAndEditRequest()
+        {
+            // log in as admin, user is logged in as admin
+            // edit a request
+            // request is edited as expected
+        }
+    }
+}

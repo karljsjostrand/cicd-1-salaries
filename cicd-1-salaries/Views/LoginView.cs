@@ -57,7 +57,7 @@
             }
             else
             {
-                Console.WriteLine("Invalid login details.\n");
+                Console.WriteLine("Invalid user details.\n");
             }
         }
 
