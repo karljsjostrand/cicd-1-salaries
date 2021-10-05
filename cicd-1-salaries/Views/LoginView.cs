@@ -10,6 +10,8 @@
 
     internal class LoginView
     {
+        private AccountController accountController;
+
         private enum Navigation
         {
             Login,
@@ -18,6 +20,8 @@
 
         public LoginView()
         {
+            accountController = new();
+
             NavMenu();
         }
 
@@ -44,7 +48,7 @@
         private void Login()
         {
             var (name, password) = PromptLoginDetails();
-            var user = Models.Data.Database.Users.Find((u) => u.Name == name && u.Password == password); // TODO get user object from user controller login method
+            var user = accountController.Login(name, password);
 
             // Create new view based on user type.
             if (user is Admin)
@@ -57,7 +61,7 @@
             }
             else
             {
-                Console.WriteLine("Invalid login details.\n");
+                Console.WriteLine("Invalid user details.\n");
             }
         }
 
