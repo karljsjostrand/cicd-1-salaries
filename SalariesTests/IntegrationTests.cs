@@ -1,4 +1,4 @@
-﻿namespace SalareisTests
+﻿namespace SalariesTests
 {
     using NUnit.Framework;
     using System;
@@ -9,6 +9,8 @@
 
     class IntegrationTests
     {
+        //private adminController = new AdminController
+
         [SetUp]
         public void SetUp()
         {
