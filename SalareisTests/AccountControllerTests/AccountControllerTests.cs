@@ -7,24 +7,24 @@ using NUnit.Framework;
 namespace SalareisTests
 {
     [TestFixture]
-    public class UserControllerTests
+    public class AccountControllerTests
     {
-
         private List<User> users;
         private User admin;
         private User user;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
             user = new User("Mohammad", "Passw0rd@123");
 
             users = new List<User>()
             {
-                admin,user
+                admin,
+                user,
             };
-            UserController.users = users;
+            AccountController.users = users;
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace SalareisTests
             var name = "admin1";
             var password = "Admin@123";
 
-            var actual = UserController.Login(name, password);
+            var actual = AccountController.Login(name, password);
 
             Assert.AreEqual(actual.Name, name);
             Assert.AreEqual(actual.Password, password);
@@ -44,7 +44,7 @@ namespace SalareisTests
             var name = "NotExist";
             var password = "123123";
 
-            var actual = UserController.Login(name, password);
+            var actual = AccountController.Login(name, password);
             Assert.IsNull(actual);
         }
         [Test]
@@ -52,7 +52,7 @@ namespace SalareisTests
         {
             var name = "Mohammad";
             var password = "Passw0rd@123";
-            var actual = UserController.RemoveUser(name, password);
+            var actual = AccountController.RemoveUser(name, password);
             Assert.IsTrue(actual);
 
         }
@@ -62,10 +62,8 @@ namespace SalareisTests
             var name = "Abcdef";
             var password = "Passw0rd@123";
             var expected = false;
-            var actual = UserController.RemoveUser(name, password);
+            var actual = AccountController.RemoveUser(name, password);
             Assert.AreEqual(expected, actual);
-
         }
-
     }
 }

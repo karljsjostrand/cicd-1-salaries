@@ -6,7 +6,7 @@ using cicd_1_salaries.Models.Data;
 
 namespace cicd_1_salaries.Controllers
 {
-    public class UserController
+    public class AccountController
     {
 
         public static List<User> users = Database.Users;
@@ -40,6 +40,7 @@ namespace cicd_1_salaries.Controllers
             if (!IsValidLogin(userName, password)) return null;
             return currentUser;
         }
+
         /// <summary>
         /// Removes user.
         /// </summary>
@@ -59,7 +60,6 @@ namespace cicd_1_salaries.Controllers
             }
             return false;
         }
-
     }
 }
 

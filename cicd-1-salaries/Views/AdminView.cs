@@ -95,7 +95,8 @@ namespace cicd_1_salaries.Views
                 Console.WriteLine($" [{i}] {requests[i]}");
             }
             Console.Write("> ");
-            var inputIndex = Convert.ToInt32(Console.ReadLine());
+            var input = Console.ReadLine() == string.Empty;
+            var inputIndex = Convert.ToInt32(input);
 
             var request = requests[inputIndex];
 

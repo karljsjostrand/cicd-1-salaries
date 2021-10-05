@@ -9,11 +9,17 @@
 
     class IntegrationTests
     {
+        [SetUp]
+        public void SetUp()
+        {
+
+        }
+
         [Test]
         public void Test_LoginAccountOrAdmin()
         {
-            // log in as account, user is logged in as account
-            // log in as admin, user is logged in as admin
+            // log in as account user, user is logged in as account
+            // log in as admin user, user is logged in as admin
         }
 
         [Test]
