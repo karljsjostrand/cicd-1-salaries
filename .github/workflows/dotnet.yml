@@ -17,7 +17,7 @@ jobs:
         #os: [ubuntu-latest, windows-latest, macos-latest]
     env: 
       name: link
-      url: ${{ secrets.LINK_URL
+      url: ${{ secrets.LINK_URL }}
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
