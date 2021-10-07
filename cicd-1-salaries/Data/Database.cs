@@ -46,7 +46,8 @@
             #endregion
 
             #region Requests
-            requests.Add(new Request(adam, Subject.Salary, 2500));
+            requests.Add(new SalaryRequest(adam, 2500));
+            requests.Add(new RoleRequest(adam, Role.Manager));
             #endregion
 
         }

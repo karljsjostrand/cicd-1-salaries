@@ -7,7 +7,7 @@ namespace cicd_1_salaries.Views
     using System;
     using System.Collections.Generic;
 
-    internal class AdminView
+    public class AdminView
     {
         private enum Nav
         {
@@ -86,24 +86,27 @@ namespace cicd_1_salaries.Views
 
             Console.Write("Name: ");
             var name = Console.ReadLine();
+            Console.WriteLine();
 
             var requests = adminController.GetAccountRequests(name);
 
             if (requests.Count > 0)
             {
                 Console.WriteLine("Select request");
-                for (int i = 0; i < requests.Count; i++)
+                for (int i = 1; i < requests.Count + 1; i++)
                 {
-                    Console.WriteLine($" [{i}] {requests[i]}");
+                    Console.WriteLine($" [{i}] {requests[i - 1]}");
                 }
                 Console.Write("> ");
-                var input = Console.ReadLine() == string.Empty;
-                var inputIndex = Convert.ToInt32(input);
+                var inputIndex = Convert.ToInt32(Console.ReadLine()) - 1; // TODO input check
+                Console.WriteLine();
 
                 var request = requests[inputIndex];
 
-                Console.WriteLine("Editing request: " + request + "\n");
+                Console.WriteLine("Editing");
+                Console.WriteLine(request);
 
+                Console.WriteLine();
                 // TODO allow for editing the request, EditRequestView?
             }
             else
@@ -126,17 +129,14 @@ namespace cicd_1_salaries.Views
             Console.Write("Name: ");
             var name = Console.ReadLine();
 
-            Console.Write("Password: ");
-            var password = Console.ReadLine();
+            var password = PromptNewUserPassword();
 
-            Console.Write("Role: ");
             var role = PromptAccountRole();
 
-            Console.Write("Salary: ");
-            var salary = Convert.ToInt32(Console.ReadLine());
+            var salary = PromptSalary();
 
             Console.Write("Admin role? (y/n): ");
-            var isAdmin = Console.ReadLine() == "y" ? true : false;
+            var isAdmin = string.Equals(Console.ReadLine(), "y", StringComparison.OrdinalIgnoreCase);
 
             var isCreated = adminController.CreateUser(name, password, role, salary, isAdmin);
 
@@ -150,22 +150,45 @@ namespace cicd_1_salaries.Views
             }
         }
 
+        private string PromptNewUserPassword()
+        {
+            Console.Write("Password: ");
+            var password = Console.ReadLine();
+
+            return IsValidPassword(password) ? password : PromptNewUserPassword();
+        }
+
+        private bool IsValidPassword(string password)
+        {
+            var hasLetter = false;
+            var hasNumber= false;
+
+            foreach (var chr in password)
+            {
+                if (char.IsLetter(chr)) hasLetter = true;
+                if (char.IsNumber(chr)) hasNumber = true;
+            }
+
+            return hasLetter && hasNumber;
+        }
+
+        private int PromptSalary()
+        {
+            Console.Write("Salary: ");
+            try
+            {
+                var salary = Convert.ToInt32(Console.ReadLine());
+                return salary;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + "\n");
+                return PromptSalary();
+            }
+        }
+
         private Role PromptAccountRole()
         {
-            //var roles = Enum.GetValues(typeof(Role));
-
-            //var roles = new Dictionary<int, Role>();
-
-            //foreach (var role in Enum.GetNames(typeof(Role)))
-            //{
-            //    roles.Add(roles.Count + 1, role);
-            //}
-
-            //for (int i = 1; i <= roles.Length; i++)
-            //{
-            //    Console.WriteLine($" [{i}] {roles.GetValue(i)}");
-            //}
-
             Console.WriteLine("Select role");
             Console.WriteLine($" {Enum.GetName(Role.Manager)}");
             Console.WriteLine($" {Enum.GetName(Role.Developer)}");
@@ -173,14 +196,16 @@ namespace cicd_1_salaries.Views
             var input = Console.ReadLine();
             Console.WriteLine();
 
-            var role = Enum.Parse(typeof(Role), input, true);
-
-            if (role is not null)
+            try
             {
+                var role = Enum.Parse(typeof(Role), input, true);
                 return (Role) role;
             }
-            
-            return PromptAccountRole();
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + "\n");
+                return PromptAccountRole();
+            }
         }
 
         private void RemoveUser()

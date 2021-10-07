@@ -64,7 +64,6 @@
             var password = "Passw0rd@123";
             var actual = accountController.RemoveUser(name, password);
             Assert.IsTrue(actual);
-
         }
 
         [Test]
