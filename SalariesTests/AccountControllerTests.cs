@@ -56,24 +56,6 @@
             var actual = accountController.Login(name, password);
             Assert.IsNull(actual);
         }
-
-        [Test]
-        public void RemoveUser_Test()
-        {
-            var name = "Mohammad";
-            var password = "Passw0rd@123";
-            var actual = accountController.RemoveUser(name, password);
-            Assert.IsTrue(actual);
-
-        }
-
-        [Test]
-        public void RemoveNotExistUser_Test()
-        {
-            var name = "Abcdef";
-            var password = "Passw0rd@123";
-            var actual = accountController.RemoveUser(name, password);
-            Assert.IsFalse(actual);
-        }
+       
     }
 }

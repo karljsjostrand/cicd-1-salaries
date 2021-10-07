@@ -41,25 +41,6 @@ namespace cicd_1_salaries.Controllers
             return currentUser;
         }
 
-        /// <summary>
-        /// Removes user.
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public bool RemoveUser(string userName, string password)
-        {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-            {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
-                if (currentUser != null)
-                {
-                    users.Remove(currentUser);
-                    return true;
-                }
-            }
-            return false;
-        }
     }
 }
 

@@ -1,15 +1,19 @@
 ﻿namespace cicd_1_salaries.Controllers
 {
-    using cicd_1_salaries.Models;
-    using cicd_1_salaries.Models.Data;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using cicd_1_salaries.Models;
+    using cicd_1_salaries.Models.Data;
 
     public class AdminController // TODO inherit fron AccountController
     {
+        public AdminController()
+        {
+
+        }
         public AdminController(Admin admin)
         {
             Admin = admin;
@@ -45,21 +49,25 @@
 
         public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
-            // User already exists.
-            if (Database.Users.Find((u) => u.Name == name) is not null) return false;
-
-            // TODO check that password contains at least one number and one letter
-
-            if (isAdmin)
+            if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(password))
             {
-                Database.Users.Add(new Admin(name, password, role, salary));
-            }
-            else
-            {
-                Database.Users.Add(new Account(name, password, role, salary));
-            }
+                // User already exists.
+                if (Database.Users.Find((u) => u.Name == name) is not null) return false;
 
-            return true;
+                // TODO check that password contains at least one number and one letter
+
+                if (isAdmin)
+                {
+                    Database.Users.Add(new Admin(name, password, role, salary));
+                }
+                else
+                {
+                    Database.Users.Add(new Account(name, password, role, salary));
+                }
+
+                return true;
+            }
+            return false;
         }
 
         public bool RemoveUser(string name, string password)
