@@ -6,22 +6,60 @@
 
     internal class AccountView
     {
-        private AccountController accountController;
-        private Account Account { get; set; }
-
         public AccountView(Account account)
         {
             accountController = new AccountController();
             Account = account;
 
-            View();
-        }
-
-        private void View()
-        {
             Console.WriteLine("Account view!\n");
 
-            Console.WriteLine($"Logged in as {Account.Name}.\n");
+            NavMenu();
+        }
+
+        private AccountController accountController;
+        private Account Account { get; set; }
+
+        private enum Nav
+        {
+            // TODO
+            DisplayBalance,
+            DisplaySalary,
+            DisplayRole,
+            RequestNewSalary,
+            RequestNewRole,
+            Exit,
+        }
+
+        private void NavMenu()
+        {
+            var exit = false;
+
+            while (exit is false)
+            {
+                var nav = PromptNavigation();
+
+                switch (nav)
+                {
+                    case Nav.Exit:
+                        exit = true;
+                        break;
+                }
+            }
+        }
+
+        private Nav PromptNavigation()
+        {
+            Console.WriteLine("Select");
+            Console.WriteLine(" [E] Exit");
+            Console.Write("> ");
+            var input = Console.ReadLine().ToUpper();
+            Console.WriteLine();
+
+            return input switch
+            {
+                "E" => Nav.Exit,
+                _ => PromptNavigation(),
+            };
         }
     }
 }
