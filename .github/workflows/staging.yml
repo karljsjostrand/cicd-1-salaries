@@ -1,23 +1,15 @@
 name: .NET
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, staging ]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    #runs-on: ${{ matrix.os }}
-
-  
-    #strategy:
-      #matrix:
-        #os: [ubuntu-latest, windows-latest, macos-latest]
-    env: 
-      name: link
-      url: ${{ secrets.LINK_URL }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     steps:
     - uses: actions/checkout@v2
     - name: Setup .NET
