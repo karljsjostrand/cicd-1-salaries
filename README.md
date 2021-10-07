@@ -1,7 +1,7 @@
-# cicd-1-salaries
+## cicd-1-salaries
 
--- "CD"
+# "CD"
 - dev -> staging -> master
 
--- CI
+# CI
 <branch from issue> -> dev
