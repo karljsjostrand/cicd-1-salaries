@@ -6,18 +6,11 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public enum Subject
+    public abstract class Request
     {
-        Role,
-        Salary,
-    }
-
-    public class Request
-    {
-        public Request(User user, Subject subject, Object value)
+        public Request(User user, Object value)
         {
             User = user;
-            Subject = subject;
             Value = value;
         }
 
@@ -25,14 +18,9 @@
         /// Requestee.
         /// </summary>
         public User User { get; set; }
-        
-        /// <summary>
-        /// Concern for request.
-        /// </summary>
-        public Subject Subject { get; set; }
 
         /// <summary>
-        /// Desired value in regard to subject.
+        /// Desired value in regard to what is requested.
         /// </summary>
         public Object Value { get; set; }
     }
