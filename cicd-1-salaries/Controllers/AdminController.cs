@@ -29,7 +29,7 @@
 
             foreach (var request in Database.Requests)
             {
-                if (request.User.Name == name) requests.Add(request);
+                if (request.Account.Name == name) requests.Add(request);
             }
 
             return requests;
