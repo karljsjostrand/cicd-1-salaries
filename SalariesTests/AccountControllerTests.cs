@@ -10,7 +10,7 @@
     class AccountControllerTests
     {
         private List<User> users;
-        private User admin;
+        private Account admin;
         private User user;
         private AccountController accountController;
 
@@ -24,8 +24,8 @@
 
             users = new List<User>()
             {
-            admin,
-            user,
+                admin,
+                user,
             };
 
             Database.Users.AddRange(users);

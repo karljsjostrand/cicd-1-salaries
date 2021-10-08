@@ -12,7 +12,7 @@ namespace SalariesTests
     {
         private List<User> users;
         private List<Request> requests;
-        private User admin;
+        private Account admin;
         private User user;
         private Account account;
         private AdminController adminController;

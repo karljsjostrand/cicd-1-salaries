@@ -18,12 +18,12 @@ namespace cicd_1_salaries.Controllers
         /// <returns></returns>
         private bool IsValidLogin(string userName, string password)
         {
-
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
                 currentUser = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password);
                 return true;
             }
+
             return false;
         }
 
@@ -36,6 +36,7 @@ namespace cicd_1_salaries.Controllers
         public User Login(string userName, string password)
         {
             if (!IsValidLogin(userName, password)) return null;
+
             return currentUser;
         }
 

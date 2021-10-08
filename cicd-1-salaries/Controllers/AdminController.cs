@@ -46,13 +46,12 @@
 
         public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
+            // Proceed if name and password is not empty.
             if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(password))
             {
-                // User already exists.
+                // Don't create if user already exists.
                 if (Database.Users.Find((u) => u.Name == name) is not null) return false;
-
-                // TODO check that password contains at least one number and one letter
-
+                                
                 if (isAdmin)
                 {
                     Database.Users.Add(new Admin(name, password, role, salary));
@@ -62,8 +61,10 @@
                     Database.Users.Add(new Account(name, password, role, salary));
                 }
 
+                // User was created.
                 return true;
             }
+
             return false;
         }
 
