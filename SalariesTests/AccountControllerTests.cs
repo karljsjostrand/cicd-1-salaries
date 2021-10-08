@@ -56,6 +56,5 @@
             var actual = accountController.Login(name, password);
             Assert.IsNull(actual);
         }
-       
     }
 }
