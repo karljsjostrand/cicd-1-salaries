@@ -21,6 +21,8 @@
         [SetUp]
         public void SetUp()
         {
+            accountController = new AccountController();
+            adminController = new AdminController();
         }
 
         /// <summary>
@@ -30,12 +32,11 @@
         [Test]
         public void Login_Then_CreateUser_Then_PayAccounts_Test()
         {
-            accountController = new AccountController();
 
             // Log in as admin1.
             admin1 = accountController.Login("admin1", "admin1234") as Admin;
 
-            adminController = new AdminController(admin1);
+             adminController = new AdminController(admin1);
 
             // Create a new admin.
             var newAdminName = "admin2";

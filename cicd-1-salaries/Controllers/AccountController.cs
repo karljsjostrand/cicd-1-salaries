@@ -8,6 +8,10 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
+        public AccountController()
+        {
+
+        }
         private User currentUser;
 
         /// <summary>

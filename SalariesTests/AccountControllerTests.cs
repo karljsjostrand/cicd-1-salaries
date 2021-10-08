@@ -44,7 +44,7 @@
         }
 
         [Test]
-        public void NotExistUser_Test()
+        public void LoginAsNotExistUser_Test()
         {
             var name = "NotExist";
             var password = "123123";
