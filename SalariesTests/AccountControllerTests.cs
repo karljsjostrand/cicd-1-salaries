@@ -4,11 +4,7 @@
     using cicd_1_salaries.Models;
     using cicd_1_salaries.Models.Data;
     using NUnit.Framework;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     class AccountControllerTests
@@ -55,6 +51,14 @@
 
             var actual = accountController.Login(name, password);
             Assert.IsNull(actual);
+        }
+
+        [Test]
+        public void RemoveAccount_Test()
+        {
+            accountController.Login("Mohammad", "Passw0rd@123");
+            var actual = accountController.RemoveAccount();
+            Assert.IsTrue(actual);
         }
     }
 }
