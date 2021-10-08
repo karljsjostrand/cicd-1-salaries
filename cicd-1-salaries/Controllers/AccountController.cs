@@ -40,11 +40,16 @@ namespace cicd_1_salaries.Controllers
             if (!IsValidLogin(userName, password)) return null;
             return currentUser;
         }
+
         /// <summary>
-        /// Removes the logged in Account from the databas.
+        /// Removes the logged-in user from the databas.
         /// </summary>
         /// <returns>true if account is removed otherwise false</returns>
-        bool RemoveAccount() { throw new NotImplementedException(); }
+        public bool RemoveAccount()
+        {
+            var removedCurrentUser = users.Remove(currentUser);
+            return removedCurrentUser;
+        }
 
     }
 }
