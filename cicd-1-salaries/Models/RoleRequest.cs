@@ -14,10 +14,7 @@
 
         public override string ToString()
         {
-            var str = $"Request made by {User.Name}";
-            str += $" | Current role: {(User as Account)?.Role}";
-            str += " | Requesting for new role: " + Value;
-            return str;
+            return $"Request made by {User.Name}\n Current role: {(User as Account)?.Role}\n Request for new role: " + Value;
         }
     }
 }

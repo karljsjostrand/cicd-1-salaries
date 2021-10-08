@@ -20,8 +20,7 @@
             }
         }
 
-
-        public static List<Request> Requests 
+        public static List<Request> Requests
         {
             get
             {
@@ -46,6 +45,8 @@
             #endregion
 
             #region Requests
+            requests.Add(new SalaryRequest(admin1, 2800));
+
             requests.Add(new SalaryRequest(adam, 2500));
             requests.Add(new RoleRequest(adam, Role.Manager));
             #endregion
