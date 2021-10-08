@@ -11,36 +11,47 @@ namespace SalariesTests
     public class AdminControllerTests
     {
         private List<User> users;
+        private List<Request> requests;
         private User admin;
         private User user;
         private Account account;
         private AdminController adminController;
+        private RoleRequest roleRequest;
+        private SalaryRequest salaryRequest;
+
         [SetUp]
         public void SetUp()
         {
+            adminController = new AdminController();
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
             user = new User("Mohammad", "Passw0rd@123");
             account = new Account("User", "User@123", Role.Developer, 2100);
-
-            adminController = new AdminController();
+            roleRequest = new RoleRequest(account, Role.Developer);
+            salaryRequest = new SalaryRequest(account, 222);
 
             users = new List<User>()
             {
-            admin,
-            user,
-            account
+                admin,
+                user,
+                account
+            };
+            requests = new List<Request>() 
+            {
+                roleRequest,
+                salaryRequest
             };
 
             Database.Users.AddRange(users);
-
+            Database.Requests.AddRange(requests);
         }
-     
+
         [Test]
         public void CreateUser_Test()
         {
             var actual = adminController.CreateUser("Bill", "User@123", Role.Developer, 2100, true);
             Assert.IsTrue(actual);
         }
+
         [Test]
         public void CreateAlreadyExistsUser_Test()
         {
@@ -48,12 +59,22 @@ namespace SalariesTests
             var actual = adminController.CreateUser("User", "User@123", Role.Developer, 2100, true);
             Assert.IsFalse(actual);
         }
+
         [Test]
         public void CreateEmptyUser_Test()
         {
             var actual = adminController.CreateUser("", "", Role.Developer, 1, true);
             Assert.IsFalse(actual);
         }
+
+        [Test]
+        public void GetAccountRequests_Test()
+        {
+            var actual = adminController.GetAccountRequests(account.Name);
+            Assert.IsTrue(actual.Contains(roleRequest));
+            Assert.IsTrue(actual.Contains(salaryRequest));
+        }
+
         [Test]
         public void RemoveUser_Test()
         {
