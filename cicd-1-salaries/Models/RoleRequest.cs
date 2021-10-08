@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return $"Request made by {Account.Name}\n Current role: {Account.Role}\n Request for new role: " + Value;
+            return $"Request made by {Account.Name} | Current role: {Account.Role} | Request for new role: " + Value;
         }
     }
 }

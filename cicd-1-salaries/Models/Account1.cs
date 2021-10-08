@@ -6,9 +6,9 @@ namespace cicd_1_salaries.Models
     using System.Text;
     using System.Threading.Tasks;
 
-    public class User
+    public class Account
     {
-        public User(string name, string password)
+        public Account(string name, string password)
         {
             Name = name;
             Password = password;

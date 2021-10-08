@@ -8,9 +8,7 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private List<User> users = Database.Users;
-
-        private User currentUser;
+        private Account currentUser;
 
         /// <summary>
         /// Checks if the User exist
@@ -20,12 +18,12 @@ namespace cicd_1_salaries.Controllers
         /// <returns></returns>
         private bool IsValidLogin(string userName, string password)
         {
-
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
+                currentUser = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password);
                 return true;
             }
+
             return false;
         }
 
@@ -35,17 +33,18 @@ namespace cicd_1_salaries.Controllers
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns>In logged user</returns>
-        public User Login(string userName, string password)
+        public Account Login(string userName, string password)
         {
             if (!IsValidLogin(userName, password)) return null;
+
             return currentUser;
         }
+
         /// <summary>
         /// Removes the logged in Account from the databas.
         /// </summary>
         /// <returns>true if account is removed otherwise false</returns>
         bool RemoveAccount() { throw new NotImplementedException(); }
-
     }
 }
 

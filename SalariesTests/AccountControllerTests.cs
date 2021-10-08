@@ -13,9 +13,9 @@
     [TestFixture]
     class AccountControllerTests
     {
-        private List<User> users;
-        private User admin;
-        private User user;
+        private List<Account> users;
+        private Account admin;
+        private Account user;
         private AccountController accountController;
 
         [SetUp]
@@ -24,9 +24,9 @@
             accountController = new AccountController();
 
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
-            user = new User("Mohammad", "Passw0rd@123");
+            user = new Account("Mohammad", "Passw0rd@123");
 
-            users = new List<User>()
+            users = new List<Account>()
             {
             admin,
             user,

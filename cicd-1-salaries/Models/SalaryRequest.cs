@@ -14,7 +14,7 @@
 
         public override string ToString()
         {
-            return $"Request made by {Account.Name}\n Current salary: {Account.Salary}\n Request for new salary: " + Value;
+            return $"Request made by {Account.Name} | Current salary: {Account.Salary} | Request for new salary: " + Value;
         }
     }
 }

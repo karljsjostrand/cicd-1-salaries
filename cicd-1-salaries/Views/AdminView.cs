@@ -98,7 +98,7 @@ namespace cicd_1_salaries.Views
                     Console.WriteLine($" [{i}] {requests[i - 1]}");
                 }
                 Console.Write("> ");
-                var inputIndex = Convert.ToInt32(Console.ReadLine()) - 1; // TODO input check
+                var inputIndex = PromptRequestIndex() - 1; // TODO input check
                 Console.WriteLine();
 
                 var request = requests[inputIndex];
@@ -113,6 +113,14 @@ namespace cicd_1_salaries.Views
             {
                 Console.WriteLine($"No requests found for user {name}.");
             }
+        }
+
+        private int PromptRequestIndex()
+        {
+            var input = Convert.ToInt32(Console.ReadLine());
+
+            //return 0 < input && ; // TODO
+            return input;
         }
 
         private void PayAccounts()

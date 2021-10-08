@@ -10,10 +10,10 @@ namespace SalariesTests
     [TestFixture]
     public class AdminControllerTests
     {
-        private List<User> users;
+        private List<Account> users;
         private List<Request> requests;
-        private User admin;
-        private User user;
+        private Account admin;
+        private Account user;
         private Account account;
         private AdminController adminController;
         private RoleRequest roleRequest;
@@ -24,12 +24,12 @@ namespace SalariesTests
         {
             adminController = new AdminController();
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
-            user = new User("Mohammad", "Passw0rd@123");
+            user = new Account("Mohammad", "Passw0rd@123");
             account = new Account("User", "User@123", Role.Developer, 2100);
             roleRequest = new RoleRequest(account, Role.Developer);
             salaryRequest = new SalaryRequest(account, 222);
 
-            users = new List<User>()
+            users = new List<Account>()
             {
                 admin,
                 user,

@@ -12,7 +12,7 @@
         Developer,
     }
 
-    public class Account : User
+    public class Account : Account
     {
         public Account(string name, string password, Role role, int salary) : base(name, password)
         {
