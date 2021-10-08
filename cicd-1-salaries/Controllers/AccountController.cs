@@ -8,8 +8,6 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private List<User> users = Database.Users;
-
         private User currentUser;
 
         /// <summary>
@@ -23,7 +21,7 @@ namespace cicd_1_salaries.Controllers
 
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
+                currentUser = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password);
                 return true;
             }
             return false;
@@ -47,7 +45,7 @@ namespace cicd_1_salaries.Controllers
         /// <returns>true if account is removed otherwise false</returns>
         public bool RemoveAccount()
         {
-            var removedCurrentUser = users.Remove(currentUser);
+            var removedCurrentUser = Database.Users.Remove(currentUser);
             return removedCurrentUser;
         }
 
