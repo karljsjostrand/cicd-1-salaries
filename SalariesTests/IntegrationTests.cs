@@ -16,11 +16,11 @@
         private Admin admin1;
         private AdminController adminController;
         private AccountController accountController;
+        private Admin newAdmin;
 
         [SetUp]
         public void SetUp()
         {
-            accountController = new AccountController();
         }
 
         /// <summary>
@@ -30,27 +30,28 @@
         [Test]
         public void Login_Then_CreateUser_Then_PayAccounts_Test()
         {
-            // log in as admin1
+            accountController = new AccountController();
+
+            // Log in as admin1.
             admin1 = accountController.Login("admin1", "admin1234") as Admin;
 
             adminController = new AdminController(admin1);
 
-            var newUserName = "admin2";
+            // Create a new admin.
+            var newAdminName = "admin2";
+            adminController.CreateUser(newAdminName, "admin2345", Role.Developer, 2222, true);
 
-            // create a new user
-            adminController.CreateUser(newUserName, "admin2345", Role.Developer, 2222, true);
+            newAdmin = Database.Users.Find((u) => u.Name == "admin2") as Admin;
 
-            var newUserAccount = Database.Users.Find((u) => u.Name == newUserName) as Account;
+            var previousNewUserBalance = newAdmin.Balance;
+            var expectedNewUserBalance = previousNewUserBalance + newAdmin.Salary;
 
-            var previousNewUserBalance = newUserAccount.Balance;
-            var expectedNewUserBalance = previousNewUserBalance + newUserAccount.Salary;
-
-            // pay all accounts
+            // Pay all accounts.
             adminController.PayAccounts();
 
-            var actualAdmin2Balance = newUserAccount.Balance;
+            var actualAdmin2Balance = newAdmin.Balance;
 
-            // assert that new users balance is as expected after payed. 
+            // Assert that new users balance is as expected after payed. 
             Assert.AreEqual(expectedNewUserBalance, actualAdmin2Balance);
         }
     }
