@@ -8,13 +8,13 @@
 
     public class RoleRequest : Request
     {
-        public RoleRequest(User user, Role role) : base(user, role)
+        public RoleRequest(Account account, Role role) : base(account, role)
         {
         }
 
         public override string ToString()
         {
-            return $"Request made by {User.Name}\n Current role: {(User as Account)?.Role}\n Request for new role: " + Value;
+            return $"Request made by {Account.Name}\n Current role: {Account.Role}\n Request for new role: " + Value;
         }
     }
 }

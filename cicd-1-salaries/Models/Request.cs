@@ -8,16 +8,16 @@
 
     public abstract class Request
     {
-        public Request(User user, Object value)
+        public Request(Account account, Object value)
         {
-            User = user;
+            Account = account;
             Value = value;
         }
 
         /// <summary>
         /// Requestee.
         /// </summary>
-        public User User { get; set; }
+        public Account Account { get; set; }
 
         /// <summary>
         /// Desired value in regard to what is requested.

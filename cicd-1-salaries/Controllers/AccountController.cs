@@ -40,26 +40,12 @@ namespace cicd_1_salaries.Controllers
             if (!IsValidLogin(userName, password)) return null;
             return currentUser;
         }
-
         /// <summary>
-        /// Removes user.
+        /// Removes the logged in Account from the databas.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public bool RemoveUser(string userName, string password)
-        {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-            {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
-                if (currentUser != null)
-                {
-                    users.Remove(currentUser);
-                    return true;
-                }
-            }
-            return false;
-        }
+        /// <returns>true if account is removed otherwise false</returns>
+        bool RemoveAccount() { throw new NotImplementedException(); }
+
     }
 }
 
