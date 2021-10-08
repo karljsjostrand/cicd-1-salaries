@@ -8,10 +8,10 @@
 
     public static class Database
     {
-        private static List<Account> users;
+        private static List<User> users;
         private static List<Request> requests;
 
-        public static List<Account> Users
+        public static List<User> Users
         {
             get
             {
@@ -31,7 +31,7 @@
 
         private static void SeedData()
         {
-            users = new List<Account>();
+            users = new List<User>();
             requests = new List<Request>();
 
             #region Users

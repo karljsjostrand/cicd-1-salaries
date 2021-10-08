@@ -8,7 +8,7 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private Account currentUser;
+        private User currentUser;
 
         /// <summary>
         /// Checks if the User exist
@@ -33,7 +33,7 @@ namespace cicd_1_salaries.Controllers
         /// <param name="userName"></param>
         /// <param name="password"></param>
         /// <returns>In logged user</returns>
-        public Account Login(string userName, string password)
+        public User Login(string userName, string password)
         {
             if (!IsValidLogin(userName, password)) return null;
 

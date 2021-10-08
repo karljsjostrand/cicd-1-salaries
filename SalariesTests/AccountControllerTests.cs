@@ -13,9 +13,9 @@
     [TestFixture]
     class AccountControllerTests
     {
-        private List<Account> users;
+        private List<User> users;
         private Account admin;
-        private Account user;
+        private User user;
         private AccountController accountController;
 
         [SetUp]
@@ -24,12 +24,12 @@
             accountController = new AccountController();
 
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
-            user = new Account("Mohammad", "Passw0rd@123");
+            user = new User("Mohammad", "Passw0rd@123");
 
-            users = new List<Account>()
+            users = new List<User>()
             {
-            admin,
-            user,
+                admin,
+                user,
             };
 
             Database.Users.AddRange(users);

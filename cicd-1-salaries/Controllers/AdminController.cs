@@ -18,7 +18,7 @@
 
         public Admin Admin { get; }
 
-        public List<Account> GetAllUsers()
+        public List<User> GetAllUsers()
         {
             return Database.Users;
         }
