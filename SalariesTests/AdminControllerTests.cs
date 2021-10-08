@@ -34,14 +34,7 @@ namespace SalariesTests
             Database.Users.AddRange(users);
 
         }
-
-        [Test]
-        public void GetAccountRequests_Test()
-        {
-            adminController.GetAccountRequests("Mohammad");
-            Assert.Fail();
-
-        }
+     
         [Test]
         public void CreateUser_Test()
         {
@@ -51,6 +44,7 @@ namespace SalariesTests
         [Test]
         public void CreateAlreadyExistsUser_Test()
         {
+            //User added to Database.Users by SetUp method.
             var actual = adminController.CreateUser("User", "User@123", Role.Developer, 2100, true);
             Assert.IsFalse(actual);
         }
