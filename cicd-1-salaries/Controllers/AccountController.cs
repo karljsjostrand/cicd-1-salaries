@@ -46,7 +46,7 @@ namespace cicd_1_salaries.Controllers
         /// <returns>true if account is removed otherwise false</returns>
         public bool RemoveAccount()
         {
-            var removedCurrentUser = users.Remove(currentUser);
+            var removedCurrentUser = Database.Users.Remove(currentUser);
             return removedCurrentUser;
         }
 
