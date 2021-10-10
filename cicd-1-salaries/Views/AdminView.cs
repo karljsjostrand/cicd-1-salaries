@@ -99,10 +99,17 @@ namespace cicd_1_salaries.Views
                 var request = requests[inputIndex];
 
                 Console.WriteLine("Editing");
-                Console.WriteLine(request);
+                Console.WriteLine(request + "\n");
 
+                if (request is RoleRequest)
+                {
+                    request.Value = PromptAccountRole();
+                }
+                if (request is SalaryRequest)
+                {
+                    request.Value = PromptSalary();
+                }
                 Console.WriteLine();
-                // TODO allow for editing the request, EditRequestView?
             }
             else
             {
@@ -193,8 +200,10 @@ namespace cicd_1_salaries.Views
         private Role PromptAccountRole()
         {
             Console.WriteLine("Select role");
-            Console.WriteLine($" {Enum.GetName(Role.Manager)}");
-            Console.WriteLine($" {Enum.GetName(Role.Developer)}");
+            foreach (var roleName in Enum.GetNames(typeof(Role)))
+            {
+                Console.WriteLine($" [{roleName}]");
+            }
             Console.Write("> ");
             var input = Console.ReadLine();
             Console.WriteLine();
