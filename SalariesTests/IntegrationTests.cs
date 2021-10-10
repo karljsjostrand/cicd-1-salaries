@@ -27,7 +27,7 @@
             var userController = new UserController();
 
             // Log in as admin.
-            //Assert.AreEqual(admin, (userController.Login(admin.Name, "admin1234")));
+            Assert.AreEqual(admin, userController.Login(admin.Name, admin.Password));
 
             var adminController = new AdminController(admin);
 
