@@ -88,18 +88,10 @@ namespace cicd_1_salaries.Views
 
             if (requests.Count > 0)
             {
-                Console.WriteLine("Select request");
-                for (int i = 1; i < requests.Count + 1; i++)
-                {
-                    Console.WriteLine($" [{i}] {requests[i - 1]}");
-                }
-                Console.Write("> ");
-                var inputIndex = PromptRequestIndex() - 1; // TODO input check
-                Console.WriteLine();
-
+                var inputIndex = PromptRequestIndex(requests, requests.Count) - 1;
                 var request = requests[inputIndex];
 
-                Console.WriteLine("Editing");
+                Console.WriteLine("\nEditing");
                 Console.WriteLine(request + "\n");
 
                 if (request is RoleRequest)
@@ -118,11 +110,17 @@ namespace cicd_1_salaries.Views
             }
         }
 
-        private int PromptRequestIndex(int maxIndex)
+        private int PromptRequestIndex(List<Request> requests, int maxIndex)
         {
+            Console.WriteLine("Select request");
+            for (int i = 1; i < requests.Count + 1; i++)
+            {
+                Console.WriteLine($" [{i}] {requests[i - 1]}");
+            }
+            Console.Write("> ");
             var input = Convert.ToInt32(Console.ReadLine());
 
-            return 0 < input && input < maxIndex ? input : PromptRequestIndex(maxIndex);
+            return 0 < input && input < maxIndex ? input : PromptRequestIndex(requests, maxIndex);
         }
 
         private void PayAccounts()
