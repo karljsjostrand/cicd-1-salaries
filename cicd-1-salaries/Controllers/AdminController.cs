@@ -5,12 +5,8 @@
     using cicd_1_salaries.Models;
     using cicd_1_salaries.Models.Data;
 
-    public class AdminController // TODO inherit fron AccountController
+    public class AdminController
     {
-        public AdminController()
-        {
-
-        }
         public AdminController(Admin admin)
         {
             Admin = admin;
@@ -39,14 +35,17 @@
         {
             foreach (var user in Database.Users)
             {
-                var account = user as Account;
-                account.Balance += account.Salary;
+                if (user is Account)
+                {
+                    var account = user as Account;
+                    account.Balance += account.Salary;
+                }
             }
         }
 
         public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
-            // Proceed if name and password is not empty.
+            // if name and password is not empty.
             if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(password))
             {
                 // Don't create if user already exists.

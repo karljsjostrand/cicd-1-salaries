@@ -6,19 +6,17 @@
 
     internal class AccountView
     {
-        public AccountView(Account account)
+        public AccountView(AccountController accountController)
         {
-            accountController = new AccountController();
-            Account = account;
+            AccountController = accountController;
 
-            Console.WriteLine($"Logged in as {account.Name}\n");
-            Console.WriteLine($"{account}\n");
+            Console.WriteLine($"Signed in as account {AccountController.Account.Name}\n");
+            Console.WriteLine($"{AccountController.Account}\n");
 
             NavMenu();
         }
 
-        private AccountController accountController;
-        private Account Account { get; set; }
+        private AccountController AccountController { get; }
 
         private enum Nav
         {
@@ -46,6 +44,7 @@
                         break;
                     case Nav.RemoveAccount:
                         RemoveAccount();
+                        exit = true;
                         break;
                     case Nav.Exit:
                         exit = true;
@@ -56,25 +55,25 @@
 
         private void RemoveAccount()
         {
-            throw new NotImplementedException();
+            AccountController.RemoveAccount();
         }
 
         private void RequestNewRole()
         {
             var role = PromptAccountRole();
 
-            var request = new RoleRequest(Account, role);
+            var request = new RoleRequest(AccountController.Account, role);
 
-            accountController.CreateRequest(request);
+            AccountController.CreateRequest(request);
         }
 
         private void RequestNewSalary()
         {
-            var role = PromptAccountRole();
+            var salary = PromptNewSalary();
 
-            var request = new RoleRequest(Account, role);
+            var request = new SalaryRequest(AccountController.Account, salary);
 
-            accountController.CreateRequest(request);
+            AccountController.CreateRequest(request);
         }
 
         private int PromptNewSalary()
@@ -119,6 +118,7 @@
             Console.WriteLine("Select");
             Console.WriteLine(" [1] Request new role");
             Console.WriteLine(" [2] Request new salary");
+            Console.WriteLine(" [3] Remove account");
             Console.WriteLine(" [E] Exit");
             Console.Write("> ");
             var input = Console.ReadLine().ToUpper();
@@ -126,6 +126,9 @@
 
             return input switch
             {
+                "1" => Nav.RequestNewRole,
+                "2" => Nav.RequestNewSalary,
+                "3" => Nav.RemoveAccount,
                 "E" => Nav.Exit,
                 _ => PromptNavigation(),
             };
