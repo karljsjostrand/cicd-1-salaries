@@ -8,7 +8,12 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private Account account;
+        public AccountController(Account account)
+        {
+            Account = account;
+        }
+
+        public Account Account { get; private set; }
 
         /// <summary>
         /// Checks if the User exist
@@ -20,7 +25,7 @@ namespace cicd_1_salaries.Controllers
         {
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                account = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password) as Account;
+                Account = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password) as Account;
                 return true;
             }
 
@@ -37,7 +42,7 @@ namespace cicd_1_salaries.Controllers
         {
             if (!IsValidLogin(userName, password)) return null;
 
-            return account;
+            return Account;
         }
 
         public void CreateRequest(Request request)
@@ -46,13 +51,12 @@ namespace cicd_1_salaries.Controllers
         }
 
         /// <summary>
-        /// Removes the logged-in user from the databas.
+        /// Remove logged in account from the database.
         /// </summary>
-        /// <returns>true if account is removed otherwise false</returns>
+        /// <returns>true if account is removed, otherwise false</returns>
         public bool RemoveAccount()
         {
-            var removedCurrentUser = Database.Users.Remove(currentUser);
-            return removedCurrentUser;
+            return Database.Users.Remove(Account);
         }
 
     }

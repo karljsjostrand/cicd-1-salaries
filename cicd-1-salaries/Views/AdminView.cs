@@ -20,16 +20,16 @@ namespace cicd_1_salaries.Views
             Exit,
         }
 
-        public AdminView(Admin admin)
+        public AdminView(AdminController adminController)
         {
-            adminController = new AdminController(admin);
+            AdminController = adminController;
 
-            Console.WriteLine($"Logged in as {admin.Name}.\n");
+            Console.WriteLine($"Administrating as {adminController.Admin.Name}\n");
 
             NavMenu();
         }
 
-        private AdminController adminController;
+        private AdminController AdminController { get; }
 
         private void NavMenu()
         {
@@ -42,7 +42,8 @@ namespace cicd_1_salaries.Views
                 switch (nav)
                 {
                     case Nav.AccountView:
-                        new AccountView(adminController.Admin as Account);
+                        var accountController = new AccountController(AdminController.Admin);
+                        new AccountView(accountController);
                         break;
                     case Nav.ListUsers:
                         ListUsers();
@@ -68,7 +69,7 @@ namespace cicd_1_salaries.Views
 
         private void ListUsers()
         {
-            foreach (var user in adminController.GetAllUsers())
+            foreach (var user in AdminController.GetAllUsers())
             {
                 Console.WriteLine(user + $"\n Password: {user.Password}");
             }
@@ -83,7 +84,7 @@ namespace cicd_1_salaries.Views
             var name = Console.ReadLine();
             Console.WriteLine();
 
-            var requests = adminController.GetAccountRequests(name);
+            var requests = AdminController.GetAccountRequests(name);
 
             if (requests.Count > 0)
             {
@@ -127,7 +128,7 @@ namespace cicd_1_salaries.Views
 
         private void PayAccounts()
         {
-            adminController.PayAccounts();
+            AdminController.PayAccounts();
 
             Console.WriteLine("It's payday! All accounts has been payed.\n");
         }
@@ -148,7 +149,7 @@ namespace cicd_1_salaries.Views
             Console.Write("Admin role? (y/n): ");
             var isAdmin = string.Equals(Console.ReadLine(), "y", StringComparison.OrdinalIgnoreCase);
 
-            var isCreated = adminController.CreateUser(name, password, role, salary, isAdmin);
+            var isCreated = AdminController.CreateUser(name, password, role, salary, isAdmin);
 
             if (isCreated)
             {
@@ -230,11 +231,11 @@ namespace cicd_1_salaries.Views
             Console.Write("Password: ");
             var password = Console.ReadLine();
 
-            var isRemoved = adminController.RemoveUser(name, password);
+            var isRemoved = AdminController.RemoveUser(name, password);
 
             if (isRemoved)
             {
-                Console.WriteLine($"Removed user {name}, {password}.");
+                Console.WriteLine($"Removed user {name}, {password} from records.");
             }
             else
             {
