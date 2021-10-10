@@ -8,7 +8,7 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private User currentUser;
+        private Account account;
 
         /// <summary>
         /// Checks if the User exist
@@ -20,7 +20,7 @@ namespace cicd_1_salaries.Controllers
         {
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
             {
-                currentUser = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password);
+                account = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password) as Account;
                 return true;
             }
 
@@ -37,7 +37,12 @@ namespace cicd_1_salaries.Controllers
         {
             if (!IsValidLogin(userName, password)) return null;
 
-            return currentUser;
+            return account;
+        }
+
+        public void CreateRequest(Request request)
+        {
+            Database.Requests.Add(request);
         }
 
         /// <summary>

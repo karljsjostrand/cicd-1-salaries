@@ -11,7 +11,8 @@
             accountController = new AccountController();
             Account = account;
 
-            Console.WriteLine("Account view!\n");
+            Console.WriteLine($"Logged in as {account.Name}\n");
+            Console.WriteLine($"{account}\n");
 
             NavMenu();
         }
@@ -21,12 +22,9 @@
 
         private enum Nav
         {
-            // TODO
-            DisplayBalance,
-            DisplaySalary,
-            DisplayRole,
-            RequestNewSalary,
             RequestNewRole,
+            RequestNewSalary,
+            RemoveAccount,
             Exit,
         }
 
@@ -40,6 +38,15 @@
 
                 switch (nav)
                 {
+                    case Nav.RequestNewRole:
+                        RequestNewRole();
+                        break;
+                    case Nav.RequestNewSalary:
+                        RequestNewSalary();
+                        break;
+                    case Nav.RemoveAccount:
+                        RemoveAccount();
+                        break;
                     case Nav.Exit:
                         exit = true;
                         break;
@@ -47,9 +54,71 @@
             }
         }
 
+        private void RemoveAccount()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void RequestNewRole()
+        {
+            var role = PromptAccountRole();
+
+            var request = new RoleRequest(Account, role);
+
+            accountController.CreateRequest(request);
+        }
+
+        private void RequestNewSalary()
+        {
+            var role = PromptAccountRole();
+
+            var request = new RoleRequest(Account, role);
+
+            accountController.CreateRequest(request);
+        }
+
+        private int PromptNewSalary()
+        {
+            try
+            {
+                Console.WriteLine("New salary: ");
+                return Convert.ToInt32(Console.ReadLine());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return PromptNewSalary();
+            }
+        }
+
+        private Role PromptAccountRole()
+        {
+            Console.WriteLine("Select role");
+            foreach (var roleName in Enum.GetNames(typeof(Role)))
+            {
+                Console.WriteLine($" [{roleName}]");
+            }
+            Console.Write("> ");
+            var input = Console.ReadLine();
+            Console.WriteLine();
+
+            try
+            {
+                var role = Enum.Parse(typeof(Role), input, true);
+                return (Role) role;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message + "\n");
+                return PromptAccountRole();
+            }
+        }
+
         private Nav PromptNavigation()
         {
             Console.WriteLine("Select");
+            Console.WriteLine(" [1] Request new role");
+            Console.WriteLine(" [2] Request new salary");
             Console.WriteLine(" [E] Exit");
             Console.Write("> ");
             var input = Console.ReadLine().ToUpper();
