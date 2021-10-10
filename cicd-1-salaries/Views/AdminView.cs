@@ -118,12 +118,11 @@ namespace cicd_1_salaries.Views
             }
         }
 
-        private int PromptRequestIndex()
+        private int PromptRequestIndex(int maxIndex)
         {
             var input = Convert.ToInt32(Console.ReadLine());
 
-            //return 0 < input && ; // TODO
-            return input;
+            return 0 < input && input < maxIndex ? input : PromptRequestIndex(maxIndex);
         }
 
         private void PayAccounts()
