@@ -13,7 +13,6 @@ namespace SalariesTests
         private List<User> users;
         private List<Request> requests;
         private Admin admin;
-        private User user;
         private Account account;
         private AdminController adminController;
         private RoleRequest roleRequest;
@@ -22,7 +21,6 @@ namespace SalariesTests
         [SetUp]
         public void SetUp()
         {
-            user = new User("Mohammad", "Passw0rd@123");
             account = new Account("User", "User@123", Role.Developer, 2100);
             admin = new Admin("admin11", "Admin@123", Role.Developer, 1);
 
@@ -34,7 +32,6 @@ namespace SalariesTests
             users = new List<User>()
             {
                 admin,
-                user,
                 account
             };
             requests = new List<Request>() 
@@ -94,8 +91,6 @@ namespace SalariesTests
             var password = "Passw0rd@123";
             var actual = adminController.RemoveUser(name, password);
             Assert.IsFalse(actual);
-
         }
-
     }
 }

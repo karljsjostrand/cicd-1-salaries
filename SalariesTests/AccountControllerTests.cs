@@ -10,22 +10,22 @@
     class AccountControllerTests
     {
         private List<User> users;
-        private Account admin;
-        private User user;
+        private Admin admin;
+        private Account account;
         private AccountController accountController;
 
         [SetUp]
         public void SetUp()
         {
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
-            user = new User("Mohammad", "Passw0rd@123");
+            account = new Account("Mohammad", "Passw0rd@123", Role.Developer, 1);
 
-            accountController = new AccountController(admin);
+            accountController = new AccountController(account);
 
             users = new List<User>()
             {
                 admin,
-                user,
+                account,
             };
 
             Database.Users.AddRange(users);
