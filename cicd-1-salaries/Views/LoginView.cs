@@ -10,7 +10,7 @@
 
     internal class LoginView
     {
-        private AccountController accountController;
+        private UserController userController;
 
         private enum Navigation
         {
@@ -20,7 +20,7 @@
 
         public LoginView()
         {
-            accountController = new();
+            userController = new();
 
             NavMenu();
         }
@@ -48,16 +48,18 @@
         private void Login()
         {
             var (name, password) = PromptLoginDetails();
-            var user = accountController.Login(name, password);
+            var user = userController.Login(name, password);
 
             // Create new view based on user type.
             if (user is Admin)
             {
-                new AdminView(user as Admin);
+                var adminController = new AdminController(user as Admin);
+                new AdminView(adminController);
             }
             else if (user is Account)
             {
-                new AccountView(user as Account);
+                var accountController = new AccountController(user as Account);
+                new AccountView(accountController);
             }
             else
             {

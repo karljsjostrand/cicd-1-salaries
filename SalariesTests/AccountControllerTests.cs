@@ -17,10 +17,10 @@
         [SetUp]
         public void SetUp()
         {
-            accountController = new AccountController();
-
             admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
             user = new User("Mohammad", "Passw0rd@123");
+
+            accountController = new AccountController(admin);
 
             users = new List<User>()
             {

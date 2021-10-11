@@ -13,47 +13,39 @@
     [TestFixture]
     class IntegrationTests
     {
-        private Admin admin1;
-        private AdminController adminController;
-        private AccountController accountController;
-        private Admin newAdmin;
-
-        [SetUp]
-        public void SetUp()
-        {
-            accountController = new AccountController();
-            adminController = new AdminController();
-        }
-
         /// <summary>
+        /// Integration test for AdminController.PayAccounts
         /// Log in as currently stored user admin1, create a new user, pay all
         /// accounts, and assert that the new users balance has been payed.
         /// </summary>
         [Test]
         public void Login_Then_CreateUser_Then_PayAccounts_Test()
         {
+            var admin = new Admin("admin", "abc123", Role.Manager, 123);
 
-            // Log in as admin1.
-            admin1 = accountController.Login("admin1", "admin1234") as Admin;
+            Database.Users.Add(admin);
+            var userController = new UserController();
 
-             adminController = new AdminController(admin1);
+            // Log in as admin.
+            Assert.AreEqual(admin, userController.Login(admin.Name, admin.Password));
 
-            // Create a new admin.
-            var newAdminName = "admin2";
-            adminController.CreateUser(newAdminName, "admin2345", Role.Developer, 2222, true);
+            var adminController = new AdminController(admin);
 
-            newAdmin = Database.Users.Find((u) => u.Name == "admin2") as Admin;
+            // Create a new user.
+            var newUserName = "admin2";
+            adminController.CreateUser(newUserName, "admin2345", Role.Developer, 2222, true);
 
-            var previousNewUserBalance = newAdmin.Balance;
-            var expectedNewUserBalance = previousNewUserBalance + newAdmin.Salary;
+            var newAdmin = Database.Users.Find((u) => u.Name == newUserName) as Admin;
+
+            var expectedNewUserBalance = newAdmin.Balance + newAdmin.Salary;
 
             // Pay all accounts.
             adminController.PayAccounts();
 
-            var actualAdmin2Balance = newAdmin.Balance;
+            // Assert that new users balance is increased as expected after accounts payed. 
+            var actualNewUserBalance = newAdmin.Balance;
 
-            // Assert that new users balance is as expected after payed. 
-            Assert.AreEqual(expectedNewUserBalance, actualAdmin2Balance);
+            Assert.AreEqual(expectedNewUserBalance, actualNewUserBalance);
         }
     }
 }
