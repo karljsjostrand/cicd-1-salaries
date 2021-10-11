@@ -56,7 +56,7 @@
         [Test]
         public void RemoveAccount_Test()
         {
-            accountController.Login("Mohammad", "Passw0rd@123");
+            accountController.Login("admin1", "Admin@123");
             var actual = accountController.RemoveAccount();
             Assert.IsTrue(actual);
         }
