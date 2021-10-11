@@ -12,7 +12,7 @@ namespace SalariesTests
     {
         private List<User> users;
         private List<Request> requests;
-        private Account admin;
+        private Admin admin;
         private User user;
         private Account account;
         private AdminController adminController;
@@ -22,10 +22,12 @@ namespace SalariesTests
         [SetUp]
         public void SetUp()
         {
-            adminController = new AdminController();
-            admin = new Admin("admin1", "Admin@123", Role.Developer, 1);
             user = new User("Mohammad", "Passw0rd@123");
             account = new Account("User", "User@123", Role.Developer, 2100);
+            admin = new Admin("admin11", "Admin@123", Role.Developer, 1);
+
+            adminController = new AdminController(admin);
+
             roleRequest = new RoleRequest(account, Role.Developer);
             salaryRequest = new SalaryRequest(account, 222);
 

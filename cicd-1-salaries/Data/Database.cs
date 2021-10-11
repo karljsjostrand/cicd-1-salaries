@@ -35,20 +35,20 @@
             requests = new List<Request>();
 
             #region Users
-            var admin1 = new Admin("admin1", "admin1234", Role.Manager, 2200);
+            var admin1 = new Admin("admin1", "admin1234", Role.Manager, 1234);
 
             users.Add(admin1);
 
-            var adam = new Account("Adam", "abc234", Role.Developer, 2000);
+            var account1 = new Account("account1", "account1234", Role.Developer, 1234);
 
-            users.Add(adam);
+            users.Add(account1);
             #endregion
 
             #region Requests
-            requests.Add(new SalaryRequest(admin1, 2800));
+            requests.Add(new SalaryRequest(admin1, 2345));
 
-            requests.Add(new SalaryRequest(adam, 2500));
-            requests.Add(new RoleRequest(adam, Role.Manager));
+            requests.Add(new SalaryRequest(account1, 3456));
+            requests.Add(new RoleRequest(account1, Role.Manager));
             #endregion
 
         }
