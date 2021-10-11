@@ -6,7 +6,7 @@ namespace cicd_1_salaries.Models
     using System.Text;
     using System.Threading.Tasks;
 
-    public class User
+    public abstract class User
     {
         public User(string name, string password)
         {
