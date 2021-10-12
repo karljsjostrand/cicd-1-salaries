@@ -7,18 +7,34 @@
 
     public class AdminController
     {
+        /// <summary>
+        /// Creates a new object of AdminController.
+        /// </summary>
+        /// <param name="admin">Signed in administrating account.</param>
         public AdminController(Admin admin)
         {
             Admin = admin;
         }
 
+        /// <summary>
+        /// Signed in admin account.
+        /// </summary>
         public Admin Admin { get; }
 
+        /// <summary>
+        /// Get all stored users.
+        /// </summary>
+        /// <returns>All user objects.</returns>
         public List<User> GetAllUsers()
         {
             return Database.Users;
         }
 
+        /// <summary>
+        /// Get all requests made by user.
+        /// </summary>
+        /// <param name="name">User name</param>
+        /// <returns>All stored request objects made by user.</returns>
         public List<Request> GetAccountRequests(string name)
         {
             List<Request> requests = new();
@@ -31,6 +47,9 @@
             return requests;
         }
 
+        /// <summary>
+        /// Increase all accounts balances with their salaries.
+        /// </summary>
         public void PayAccounts()
         {
             foreach (var user in Database.Users)
@@ -43,13 +62,22 @@
             }
         }
 
+        /// <summary>
+        /// Create a new user account.
+        /// </summary>
+        /// <param name="name">User name</param>
+        /// <param name="password">User password</param>
+        /// <param name="role">User role</param>
+        /// <param name="salary">User salary</param>
+        /// <param name="isAdmin">Whether the account should have admin privileges.</param>
+        /// <returns>true if user account was created, otherwise false.</returns>
         public bool CreateUser(string name, string password, Role role, int salary, bool isAdmin)
         {
             // if name and password is not empty.
             if (!String.IsNullOrEmpty(name) && !String.IsNullOrEmpty(password))
             {
                 // Don't create if user already exists.
-                if (Database.Users.Find((u) => u.Name == name) is not null) return false;
+                if (AccountExists(name)) return false;
                                 
                 if (isAdmin)
                 {
@@ -67,6 +95,12 @@
             return false;
         }
 
+        /// <summary>
+        /// Remove user found matching user details.
+        /// </summary>
+        /// <param name="name">User name</param>
+        /// <param name="password">User password</param>
+        /// <returns>true if user was removed, otherwise false.</returns>
         public bool RemoveUser(string name, string password)
         {
             var user = Database.Users.Find((u) => u.Name == name && u.Password == password);
@@ -76,6 +110,22 @@
             Database.Users.Remove(user);
 
             return true;
+        }
+
+        private bool AccountExists(string name)
+        {
+            if (Database.Users.Find((u) => u.Name == name) is not null) return true;
+
+            return false;
+        }
+
+        /// <summary>
+        /// Checks whether admin account is in database.
+        /// </summary>
+        /// <returns>true if admin account exists, otherwise false.</returns>
+        public bool AdminAccountExists()
+        {
+            return AccountExists(Admin.Name);
         }
     }
 }

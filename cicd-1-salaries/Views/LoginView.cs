@@ -91,6 +91,7 @@
             var name = Console.ReadLine();
             Console.Write("Password: ");
             var password = Console.ReadLine();
+            Console.WriteLine();
 
             return (name, password);
         }

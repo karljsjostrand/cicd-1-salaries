@@ -44,6 +44,12 @@ namespace cicd_1_salaries.Views
                     case Nav.AccountView:
                         var accountController = new AccountController(AdminController.Admin);
                         new AccountView(accountController);
+
+                        // Admin account was removed?
+                        if (AdminController.AdminAccountExists() is false)
+                        {
+                            exit = true;
+                        }
                         break;
                     case Nav.ListUsers:
                         ListUsers();
