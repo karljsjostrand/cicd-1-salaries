@@ -11,11 +11,7 @@
     {
         private static void Main()
         {
-            //new LoginView(); // TODO uncomment
-
-            var admin = Database.Users.Find((u) => u.Name == "admin1") as Admin; // TODO remove
-            var aC = new AdminController(admin); // TODO remove
-            new AdminView(aC); // TODO remove
+            new LoginView();
         }
     }
 }
