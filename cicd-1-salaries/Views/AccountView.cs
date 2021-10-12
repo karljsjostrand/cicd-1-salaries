@@ -80,12 +80,14 @@
         {
             try
             {
-                Console.WriteLine("New salary: ");
-                return Convert.ToInt32(Console.ReadLine());
+                Console.Write("New salary: ");
+                var input = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                return input;
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message + "\n");
                 return PromptNewSalary();
             }
         }
