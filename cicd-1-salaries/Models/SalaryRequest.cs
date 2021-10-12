@@ -8,16 +8,13 @@
 
     public class SalaryRequest : Request
     {
-        public SalaryRequest(User user, int newSalary) : base(user, newSalary)
+        public SalaryRequest(Account account, int newSalary) : base(account, newSalary)
         {
         }
 
         public override string ToString()
         {
-            var str = $"Request made by {User.Name}";
-            str += $" | Current salary: {(User as Account)?.Salary}";
-            str += " | Requesting for new salary: " + Value;
-            return str;
+            return $"Request made by {Account.Name} | Current salary: {Account.Salary} | Request for new salary: " + Value;
         }
     }
 }

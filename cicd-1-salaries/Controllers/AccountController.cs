@@ -8,58 +8,47 @@ namespace cicd_1_salaries.Controllers
 {
     public class AccountController
     {
-        private List<User> users = Database.Users;
+        public AccountController(Account account)
+        {
+            Account = account;
+        }
 
-        private User currentUser;
+        public Account Account { get; private set; }
 
         /// <summary>
-        /// Checks if the User exist
+        /// Log in user account to controller.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        private bool IsValidLogin(string userName, string password)
+        /// <param name="name">User name</param>
+        /// <param name="password">User password</param>
+        /// <returns>User object matching <paramref name="name"/> and <paramref name="password"/>.</returns>
+        public User Login(string name, string password)
         {
-
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(password))
             {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
-                return true;
+                Account = Database.Users.FirstOrDefault(user => user.Name == name && user.Password == password) as Account;
             }
-            return false;
+
+            return Account;
         }
 
         /// <summary>
-        /// Logs in.
+        /// Store request.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns>In logged user</returns>
-        public User Login(string userName, string password)
+        /// <param name="request">Request to be stored.</param>
+        public void CreateRequest(Request request)
         {
-            if (!IsValidLogin(userName, password)) return null;
-            return currentUser;
+            Database.Requests.Add(request);
         }
 
         /// <summary>
-        /// Removes user.
+        /// Remove logged in account from the database.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        public bool RemoveUser(string userName, string password)
+        /// <returns>true if account is removed, otherwise false.</returns>
+        public bool RemoveAccount()
         {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
-            {
-                currentUser = users.FirstOrDefault(user => user.Name == userName && user.Password == password);
-                if (currentUser != null)
-                {
-                    users.Remove(currentUser);
-                    return true;
-                }
-            }
-            return false;
+            return Database.Users.Remove(Account);
         }
+
     }
 }
 
