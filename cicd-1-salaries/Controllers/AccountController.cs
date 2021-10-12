@@ -16,35 +16,25 @@ namespace cicd_1_salaries.Controllers
         public Account Account { get; private set; }
 
         /// <summary>
-        /// Checks if the User exist
+        /// Log in user account to controller.
         /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        private bool IsValidLogin(string userName, string password)
+        /// <param name="name">User name</param>
+        /// <param name="password">User password</param>
+        /// <returns>User object matching <paramref name="name"/> and <paramref name="password"/>.</returns>
+        public User Login(string name, string password)
         {
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(password))
             {
-                Account = Database.Users.FirstOrDefault(user => user.Name == userName && user.Password == password) as Account;
-                return true;
+                Account = Database.Users.FirstOrDefault(user => user.Name == name && user.Password == password) as Account;
             }
-
-            return false;
-        }
-
-        /// <summary>
-        /// Logs in.
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns>In logged user</returns>
-        public User Login(string userName, string password)
-        {
-            if (!IsValidLogin(userName, password)) return null;
 
             return Account;
         }
 
+        /// <summary>
+        /// Store request.
+        /// </summary>
+        /// <param name="request">Request to be stored.</param>
         public void CreateRequest(Request request)
         {
             Database.Requests.Add(request);
@@ -53,7 +43,7 @@ namespace cicd_1_salaries.Controllers
         /// <summary>
         /// Remove logged in account from the database.
         /// </summary>
-        /// <returns>true if account is removed, otherwise false</returns>
+        /// <returns>true if account is removed, otherwise false.</returns>
         public bool RemoveAccount()
         {
             return Database.Users.Remove(Account);
